@@ -1,9 +1,9 @@
 # MobileBackup
-This program is used to download the debug info zip file from SetNetGo.  
+<p>This program is used to download the debug info zip file from SetNetGo.  
 This program can be run as a system Service or as a console application.  
 It will start as a system Service and attemp to use a configuration file  
 located at C:\RobotConnectionData.xml if no command arguments are given.  
-You can use the -generate command argument to create a sample configuration file.  
+You can use the -generate command argument to create a sample configuration file.</p>  
   
   
 The first argument must be one of:  
