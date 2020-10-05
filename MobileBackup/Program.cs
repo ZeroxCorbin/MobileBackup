@@ -106,7 +106,7 @@ namespace MobileBackup
             StringBuilder sb = new StringBuilder();
 
             sb.AppendLine("This program is used to download the debug info zip file from SetNetGo.");
-            sb.AppendLine("This program can be run as a system Service or as a console application.");
+            sb.AppendLine("It can be run as a system Service or as a console application.");
             sb.AppendLine("It will start as a system Service and attempt to use a configuration file");
             sb.AppendLine("located at C:\\RobotConnectionData.xml if no command arguments are given.");
             sb.AppendLine("You can use the -generate command argument to create a sample configuration file.");
