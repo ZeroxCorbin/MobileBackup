@@ -47,7 +47,7 @@ namespace MobileBackup
                 Console.WriteLine($"Using Configuration file: {ConfigurationFile}");
             else
             {
-                Console.WriteLine($"Configuration file does not exist: {ConfigurationFile}");
+                Console.WriteLine($"ERROR: Configuration file does not exist: {ConfigurationFile}");
                 return;
             }
 
@@ -122,7 +122,7 @@ namespace MobileBackup
 
             string configs = null;
 
-            for(int i = 1; i < args.Length; i++)
+            for(int i = 0; i < args.Length; i++)
                 if(args[i].Length > 1 && (args[i][0] == '-' || args[i][0] == '/'))
                 {
                     switch(args[i].Substring(1).ToLower())
@@ -265,7 +265,7 @@ namespace MobileBackup
 
             if(!(ip & user & pass & file) & !config)
             {
-                Console.WriteLine($"ERROR: You must supply command arguments: -ip -port -user -pass -file");
+                Console.WriteLine($"ERROR: You must supply command arguments: -ip -user -pass -file");
                 return false;
             }
 

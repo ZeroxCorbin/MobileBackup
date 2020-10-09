@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using System.Configuration.Install;
 
-namespace gotnet.biz.Utilities.WindowsServices
+namespace MobileBackup
 {
     public static class SelfInstaller
     {

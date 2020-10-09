@@ -33,7 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject />
+    <StartupObject>MobileBackup.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -49,9 +49,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\ConnectionString.cs" />
-    <Compile Include="Classes\PingCommands.cs" />
-    <Compile Include="Classes\StaticUtils.cs" />
+    <Compile Include="..\..\SupportClasses\ConnectionString.cs">
+      <Link>Classes\ConnectionString.cs</Link>
+    </Compile>
+    <Compile Include="..\..\SupportClasses\PingCommands.cs">
+      <Link>Classes\PingCommands.cs</Link>
+    </Compile>
+    <Compile Include="..\..\SupportClasses\StaticUtils.cs">
+      <Link>Classes\StaticUtils.cs</Link>
+    </Compile>
     <Compile Include="MobileClasses\MobileDebugInfoSettings.cs" />
     <Compile Include="MobileClasses\MobileDebugInfoDownload.cs" />
     <Compile Include="ProjectInstaller.cs">
@@ -68,15 +74,38 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="SelfInstaller.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <AdditionalFiles Include="LICENSE">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AdditionalFiles>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="MobileBackup.resx">
+      <DependentUpon>MobileBackup.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ProjectInstaller.resx">
       <DependentUpon>ProjectInstaller.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\README.txt">
+      <Link>Resources\README.txt</Link>
+    </EmbeddedResource>
+    <Content Include="README.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
