@@ -101,11 +101,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="..\README.txt">
-      <Link>Resources\README.txt</Link>
-    </EmbeddedResource>
-    <Content Include="README.txt">
+      <Link>README.txt</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

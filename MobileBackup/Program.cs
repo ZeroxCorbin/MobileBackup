@@ -150,7 +150,7 @@ namespace MobileBackup
 
         private static void PrintHelp()
         {
-            Console.WriteLine(GetResourceData("MobileBackup.Resources.README.txt"));
+            Console.WriteLine(GetResourceData("MobileBackup.README.txt"));
             //StringBuilder sb = new StringBuilder();
 
             //sb.AppendLine("This program is used to download the debug info zip file from SetNetGo.");
