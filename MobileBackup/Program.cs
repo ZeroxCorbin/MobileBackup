@@ -5,20 +5,18 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Security.Principal;
 using System.ServiceProcess;
 using System.Text;
-using System.Threading;
 
 namespace MobileBackup
 {
     static class Program
     {
-        private static void Elevate(string[] args)
+        private static bool Elevate(string[] args)
         {
             if((new WindowsPrincipal(WindowsIdentity.GetCurrent())).IsInRole(WindowsBuiltInRole.Administrator))
-                return;
+                return false;
 
             StringBuilder sb = new StringBuilder();
             int i = 0;
@@ -39,11 +37,13 @@ namespace MobileBackup
             try
             {
                 Process.Start(SelfProc);
+
             }
             catch
             {
 
             }
+            return true;
         }
         public static string GetResourceData(string resourceName)
         {
@@ -78,24 +78,26 @@ namespace MobileBackup
                         break;
                     case "generate":
                     {
-                        Elevate(args);
-                        if(args.Length >= 2)
-                            GenerateConfigFile(args[1]);
-                        else
-                            GenerateConfigFile(null);
+                        if(!Elevate(args))
+                        {
+                            if(args.Length >= 2)
+                                GenerateConfigFile(args[1]);
+                            else
+                                GenerateConfigFile(null);
+                        }
                         found = true;
                         break;
                     }
                     case "install":
                     case "i":
-                        Elevate(args);
-                        SelfInstaller.InstallMe();
+                        if(!Elevate(args))
+                            SelfInstaller.InstallMe();
                         found = true;
                         break;
                     case "uninstall":
                     case "u":
-                        Elevate(args);
-                        SelfInstaller.UninstallMe();
+                        if(!Elevate(args))
+                            SelfInstaller.UninstallMe();
                         found = true;
                         break;
                 }
@@ -104,13 +106,15 @@ namespace MobileBackup
             if(!found)
                 if(Environment.UserInteractive)
                 {
-                    Elevate(args);
-                    Console.WriteLine("Console Mode");
-                    MobileBackup s = new MobileBackup();
-                    if(args.Length > 0)
-                        s.Init(args, false);
-                    else
-                        s.Init(false);
+                    if(!Elevate(args))
+                    {
+                        Console.WriteLine("Console Mode");
+                        MobileBackup s = new MobileBackup();
+                        if(args.Length > 0)
+                            s.Init(args, false);
+                        else
+                            s.Init(false);
+                    }
                 }
                 else
                 {

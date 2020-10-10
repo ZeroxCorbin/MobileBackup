@@ -104,7 +104,7 @@ namespace MobileBackup
 
         private bool ParseArgs(string[] args)
         {
-            Console.WriteLine($"Parsing input Args[]");
+            //Console.WriteLine($"Parsing input Args[]");
 
             bool ip = false;
             //bool port = false;
@@ -222,16 +222,20 @@ namespace MobileBackup
                                 return false;
                             }
 
-                            if(i + 1 >= args.Length) return false;
+                            if(i + 1 >= args.Length)
+                            {
+                                Console.WriteLine($"ERROR: No file path specified for -file argument.");
+                                return false;
+                            }
 
                             files = args[i + 1].Trim();
-                            //if(string.IsNullOrEmpty(files))
-                            file = true;
-                            //else
-                            //{
-                            //    Console.WriteLine($"ERROR: Invalid destination file path. {files}");
-                            //    return false;
-                            //}
+                            if(files.IndexOfAny(Path.GetInvalidPathChars()) == -1)
+                                file = true;
+                            else
+                            {
+                                Console.WriteLine($"ERROR: Invalid destination file path. {files}");
+                                return false;
+                            }
                             break;
                         }
                         case "config":
@@ -284,7 +288,7 @@ namespace MobileBackup
                 Console.WriteLine($"Retrieving debug file from IP: {mbd.IP}");
                 if(MobileDebugInfoDownload.GetDebugFile(mbd.IP, mbd.UserName, mbd.Password, mbd.FilePath))
                 {
-                    Console.WriteLine($"Debug file saved.: {mbd.FilePath}");
+                    Console.WriteLine($"Debug file saved to: {mbd.FilePath}");
                 }
                 else
                 {
